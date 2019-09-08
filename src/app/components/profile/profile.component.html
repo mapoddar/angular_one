@@ -1,6 +1,8 @@
 <form action="" class="search_form">
     <div class="form-group">
         <input type="text" class="form-control" placeholder="Search Git" [(ngModel)]="username"name="username" (keyup)="findprofile()">
+        <input type="text" placeholder="Create a Repo" class="form-control" #myinput>
+        <button class="btn btn-sm btn-warning" (click)="createrepo(myinput.value)"><a routerLink="" >Create Repo</a></button>
     </div>
 </form>
 <div *ngIf="profile">
@@ -34,7 +36,16 @@
                         </p>
                         <p>
                          <a href="https://github.com/{{profile.login}}" class="btn btn-success btn-sm" target="_blank">View profile at github</a></p>
-                         
+                         <h3 class="panel-title">Repositories</h3>
+                         <div class="panel-body" *ngFor="let repo of repos">
+                                <p>
+                                <a (click)="captureRepo(repo)">{{repo.name}}</a>
+                                <br>
+                                <a href="{{repo.html_url}}" class="btn btn-sm btn-warning mybtn1">View Project</a>
+                                <button class="btn btn-sm btn-warning" (click)="deleterepo(repo)" >Delete this Project</button>
+                                <button routerLink="favourites" class="btn btn-sm btn-warning" (click)="additem(repo)">Add to Favourites</button>
+                                </p>
+                            </div>
                     </div>
 
  
